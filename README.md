@@ -1,8 +1,8 @@
-# Simple Log-in
+Simple Log-in
 
 Focused Spring Boot login project: sign up, form-based login, logout, and one protected menu titled **“Simple Log-in Page.”**
 
-## Included
+Included
 
 - Spring Boot 3.5 / Java 17 / Maven
 - Thymeleaf pages with background
@@ -13,7 +13,7 @@ Focused Spring Boot login project: sign up, form-based login, logout, and one pr
 - JSON API validation and error responses, friendly HTML error pages
 - Unit, repository, and MVC/security tests
 
-## To Run:
+To Run:
 
 ```bash
 ./mvnw spring-boot:run
