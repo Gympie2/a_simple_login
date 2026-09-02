@@ -1,11 +1,11 @@
-# Simple Log-in Page
+# Simple Log-in
 
-A deliberately focused Spring Boot login project: sign up, form-based login, logout, and one protected menu titled **“Simple Log-in Page.”**
+Focused Spring Boot login project: sign up, form-based login, logout, and one protected menu titled **“Simple Log-in Page.”**
 
 ## Included
 
 - Spring Boot 3.5 / Java 17 / Maven
-- Thymeleaf pages with the parchment-paper background
+- Thymeleaf pages with background
 - Registration form with Bean Validation and password confirmation
 - Spring Security form login/logout, BCrypt password hashing, `USER` and `ADMIN` roles
 - H2 in-memory database with JPA/Hibernate
@@ -13,14 +13,12 @@ A deliberately focused Spring Boot login project: sign up, form-based login, log
 - JSON API validation and error responses, friendly HTML error pages
 - Unit, repository, and MVC/security tests
 
-The project intentionally stays account-only. It does not add unrelated screens or domain entities.
-
-## Run
+## To Run:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Open [http://localhost:8080/login](http://localhost:8080/login). The H2 console is at `/h2-console` while the app runs.
+Open at [http://localhost:8080/login](http://localhost:8080/login). The H2 console is at `/h2-console` while the app runs.
 
 Development administrator: `admin` / `change-me`.
