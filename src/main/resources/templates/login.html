@@ -9,21 +9,20 @@
 <body class="parchment-page">
 <main class="auth-shell">
     <section class="auth-card" aria-labelledby="login-title">
-        <p class="eyebrow">A small, secure space</p>
         <h1 id="login-title">Welcome back</h1>
-        <p class="intro">Log in to reach your Simple Log-in Page.</p>
         <p class="notice success" th:if="${param.registered}">Your account has been created. You can log in now.</p>
         <p class="notice error" th:if="${param.error}">That username or password was not recognised.</p>
-        <p class="notice success" th:if="${param.logout}">You have been logged out safely.</p>
+        <p class="notice success" th:if="${param.logout}">You have been logged out.</p>
         <form th:action="@{/login}" method="post" class="auth-form">
             <label for="username">Username</label>
             <input id="username" name="username" autocomplete="username" required autofocus>
             <label for="password">Password</label>
-            <input id="password" name="password" type="password" autocomplete="current-password" required>
+            <div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" required><button class="password-toggle" type="button" data-password-toggle="password" aria-controls="password" aria-pressed="false">Show</button></div>
             <button type="submit" class="button">Log in</button>
         </form>
         <p class="helper">New here? <a th:href="@{/signup}">Create an account</a></p>
     </section>
 </main>
+<script th:src="@{/js/password-visibility.js}" defer></script>
 </body>
 </html>

@@ -49,6 +49,10 @@ h1 { margin: 0; font-size: clamp(2.3rem, 8vw, 3.5rem); letter-spacing: -0.06em; 
 .auth-form label { margin-top: 8px; color: var(--ink-soft); font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; font-weight: 700; }
 .auth-form input { width: 100%; min-height: 47px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--cream); color: var(--ink); font: inherit; outline: none; }
 .auth-form input:focus { border-color: var(--berry); box-shadow: 0 0 0 3px rgba(127, 63, 88, 0.14); }
+.password-field { position: relative; }
+.password-field input { padding-right: 76px; }
+.password-toggle { position: absolute; top: 50%; right: 7px; min-width: 58px; transform: translateY(-50%); border: 0; border-radius: 7px; padding: 7px 8px; color: var(--berry-deep); background: transparent; cursor: pointer; font: 800 0.74rem ui-sans-serif, system-ui, sans-serif; }
+.password-toggle:hover, .password-toggle:focus-visible { background: rgba(127, 63, 88, 0.11); outline: none; }
 
 .button {
     display: inline-flex;
