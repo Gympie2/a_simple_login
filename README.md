@@ -1,6 +1,6 @@
 # Herb Catalogue
 
-A simple herb catalogue with public browsing and search, accounts, notes and administrator management pages.
+A herb catalogue with browsing and search, accounts, notes and administrator management pages.
 
 Included:
 
