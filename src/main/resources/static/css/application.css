@@ -85,3 +85,125 @@ h1 { margin: 0; font-size: clamp(2.3rem, 8vw, 3.5rem); letter-spacing: -0.06em; 
     .parchment-page { padding: 16px; }
     .auth-card, .menu-card { padding: 29px 24px; border-radius: 20px; }
 }
+
+.catalogue-page {
+    min-height: 100vh;
+    background: #f5ead1 url("/images/parchment-paper.png") center / cover fixed;
+    color: var(--ink);
+}
+
+.site-header {
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 250, 240, 0.94);
+}
+
+.site-header-inner, .content-shell {
+    width: min(100% - 36px, 1040px);
+    margin: 0 auto;
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    min-height: 64px;
+}
+
+.site-brand, .site-nav a, .link-button, .plain-link, .back-link a, .table-actions a, .card-actions a {
+    color: var(--berry-deep);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.site-brand { font-size: 1.05rem; }
+
+.site-nav, .site-nav form, .table-actions, .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.site-nav { flex-wrap: wrap; justify-content: flex-end; font-size: 0.86rem; }
+.link-button, .text-danger {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: inherit;
+    font-weight: 750;
+}
+.link-button { color: var(--berry-deep); }
+.text-danger { color: #913a4a; }
+
+.content-shell { padding: 48px 0 64px; }
+.narrow-content, .form-content { max-width: 760px; }
+
+.page-heading { margin-bottom: 28px; }
+.page-heading h1, .record-card h1, .form-content h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.045em; }
+.page-heading p, .record-card p, .note-card p, .empty-state, .result-count { color: var(--ink-soft); font-family: ui-sans-serif, system-ui, sans-serif; line-height: 1.55; }
+.page-heading.with-action { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+
+.filter-form, .catalogue-form {
+    display: grid;
+    gap: 8px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(255, 250, 240, 0.94);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.filter-form { grid-template-columns: auto minmax(170px, 1fr) auto minmax(150px, 0.65fr) auto auto; align-items: center; }
+.filter-form label, .catalogue-form label { color: var(--ink-soft); font-size: 0.84rem; font-weight: 750; }
+.filter-form input, .filter-form select, .catalogue-form input, .catalogue-form select, .catalogue-form textarea {
+    width: 100%;
+    min-height: 43px;
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    font: inherit;
+}
+.catalogue-form textarea { resize: vertical; min-height: 130px; }
+.filter-form input:focus, .filter-form select:focus, .catalogue-form input:focus, .catalogue-form select:focus, .catalogue-form textarea:focus { border-color: var(--berry); outline: 2px solid rgba(127, 63, 88, 0.14); }
+.catalogue-form { max-width: 650px; }
+.catalogue-form .button { width: auto; }
+
+.compact-button, .compact-link, .modest-button { width: auto; margin: 0; white-space: nowrap; }
+.compact-button { padding: 10px 15px; }
+.compact-link { padding: 11px 15px; }
+.modest-button { width: fit-content; }
+.plain-link { padding: 8px 0; font-size: 0.85rem; }
+
+.result-count { margin: 22px 0 10px; font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 250, 240, 0.94); }
+.catalogue-table { width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.9rem; text-align: left; }
+.catalogue-table th, .catalogue-table td { padding: 14px 15px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; }
+.catalogue-table th { color: var(--ink-soft); background: rgba(231, 201, 144, 0.22); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.catalogue-table tr:last-child td { border-bottom: 0; }
+.catalogue-table td:first-child a { color: var(--berry-deep); font-weight: 800; text-decoration: none; }
+.table-actions, .card-actions { gap: 12px; font-size: 0.84rem; }
+.empty-state { padding: 24px 0; }
+
+.back-link { margin: 0 0 18px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.88rem; }
+.record-card, .note-card { padding: 26px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 250, 240, 0.94); }
+.record-category { margin: 0 0 8px; color: var(--berry) !important; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.botanical-name { margin: 8px 0 22px; color: var(--ink-soft); font-style: italic; }
+.record-description { margin: 0 0 22px; white-space: pre-line; }
+.note-list { display: grid; gap: 14px; }
+.note-card h2 { margin: 0; font-size: 1.35rem; }
+.note-card p:not(.record-category) { white-space: pre-line; }
+
+@media (max-width: 760px) {
+    .site-header-inner { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+    .site-nav { justify-content: flex-start; gap: 11px 14px; }
+    .content-shell { padding-top: 32px; }
+    .filter-form { grid-template-columns: 1fr; }
+    .page-heading.with-action { align-items: flex-start; flex-direction: column; }
+    .compact-link { width: 100%; }
+}

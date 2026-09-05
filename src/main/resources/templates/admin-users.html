@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Users · Herb Catalogue</title><link rel="stylesheet" th:href="@{/css/application.css}"></head>
+<body class="catalogue-page">
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a><nav class="site-nav" aria-label="Main navigation"><a th:href="@{/admin/herbs}">Manage herbs</a><a th:href="@{/admin/categories}">Categories</a><a th:href="@{/admin/users}">Users</a><form th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form></nav></div></header>
+<main class="content-shell"><section class="page-heading"><h1>Users</h1><p>This read-only dashboard lists account roles. Full JSON user management is available at <code>/api/users</code>.</p></section>
+    <div class="table-wrap"><table class="catalogue-table"><thead><tr><th>Username</th><th>Name</th><th>Email</th><th>Roles</th></tr></thead><tbody><tr th:each="user : ${users}"><td th:text="${user.username}">User</td><td th:text="${user.displayName}">Name</td><td th:text="${user.email}">Email</td><td th:text="${#strings.listJoin(user.roles, ', ')}">Role</td></tr></tbody></table></div>
+</main>
+</body>
+</html>

@@ -30,6 +30,17 @@ class WebAndSecurityTests {
     }
 
     @Test
+    void publicCatalogueAndSearchApiRenderWithoutSigningIn() throws Exception {
+        mockMvc.perform(get("/catalogue"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Herbs")));
+
+        mockMvc.perform(get("/api/herbs").param("query", "lavender"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("Lavender"));
+    }
+
+    @Test
     void successfulSignupRedirectsToLogin() throws Exception {
         mockMvc.perform(post("/signup").with(csrf())
                         .param("displayName", "New Reader")
@@ -58,10 +69,40 @@ class WebAndSecurityTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
+    void signedInUserCanCreateAPersonalHerbNote() throws Exception {
+        mockMvc.perform(post("/notes").with(csrf())
+                        .param("herbId", "1")
+                        .param("title", "Presentation note")
+                        .param("body", "This note confirms that the personal-notes flow works."))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/notes?created"));
+    }
+
+    @Test
     @WithMockUser(roles = "USER")
     void regularUsersCannotOpenTheAccountApi() throws Exception {
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void regularUsersCannotModifyCatalogueRecords() throws Exception {
+        mockMvc.perform(post("/api/herbs").with(csrf())
+                        .contentType("application/json")
+                        .content("{\"name\":\"Test herb\",\"botanicalName\":\"Testus herb\",\"description\":\"Test description\",\"categoryId\":1}"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void administratorsCanCreateCategoriesThroughTheApi() throws Exception {
+        mockMvc.perform(post("/api/categories").with(csrf())
+                        .contentType("application/json")
+                        .content("{\"name\":\"Test category\",\"description\":\"Created by an integration test.\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name").value("Test category"));
     }
 
     @Test

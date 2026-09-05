@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Manage Categories · Herb Catalogue</title><link rel="stylesheet" th:href="@{/css/application.css}"></head>
+<body class="catalogue-page">
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a><nav class="site-nav" aria-label="Main navigation"><a th:href="@{/admin/herbs}">Manage herbs</a><a th:href="@{/admin/categories}">Categories</a><a th:href="@{/admin/users}">Users</a><form th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form></nav></div></header>
+<main class="content-shell"><div class="page-heading with-action"><div><h1>Categories</h1><p>Categories group herbs in the public catalogue.</p></div><a class="button compact-link" th:href="@{/admin/categories/new}">Add category</a></div>
+    <p class="notice error" th:if="${error}" th:text="${error}">Error</p><p class="notice success" th:if="${param.created}">Category added.</p><p class="notice success" th:if="${param.updated}">Category updated.</p><p class="notice success" th:if="${param.deleted}">Category deleted.</p>
+    <div class="table-wrap"><table class="catalogue-table"><thead><tr><th>Name</th><th>Description</th><th>Actions</th></tr></thead><tbody><tr th:each="category : ${categories}"><td th:text="${category.name}">Category</td><td th:text="${category.description}">Description</td><td class="table-actions"><a th:href="@{/admin/categories/{id}/edit(id=${category.id})}">Edit</a><form th:action="@{/admin/categories/{id}/delete(id=${category.id})}" method="post"><button type="submit" class="text-danger">Delete</button></form></td></tr></tbody></table></div>
+</main>
+</body>
+</html>

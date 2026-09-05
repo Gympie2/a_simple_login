@@ -19,10 +19,14 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/css/**", "/images/**", "/js/**", "/login", "/signup", "/error", "/h2-console/**")
+                        .requestMatchers("/css/**", "/images/**", "/js/**", "/login", "/signup", "/error", "/h2-console/**",
+                                "/catalogue/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/herbs/**", "/api/categories/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN")
                         .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        .requestMatchers("/api/herbs/**", "/api/categories/**", "/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/notes/**", "/notes/**").authenticated()
                         .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/", true).permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll())

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herb Catalogue</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+</head>
+<body class="catalogue-page">
+<header class="site-header">
+    <div class="site-header-inner">
+        <a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a th:href="@{/catalogue}">Browse</a>
+            <a th:if="${currentUsername != null}" th:href="@{/notes}">My notes</a>
+            <a th:if="${isAdmin}" th:href="@{/admin/herbs}">Manage</a>
+            <a th:if="${currentUsername == null}" th:href="@{/login}">Log in</a>
+            <a th:if="${currentUsername == null}" th:href="@{/signup}">Sign up</a>
+            <form th:if="${currentUsername != null}" th:action="@{/logout}" method="post">
+                <button type="submit" class="link-button">Log out</button>
+            </form>
+        </nav>
+    </div>
+</header>
+<main class="content-shell">
+    <section class="page-heading">
+        <h1>Herbs</h1>
+        <p>Browse a simple collection of herbs by name or category.</p>
+    </section>
+
+    <form class="filter-form" th:action="@{/catalogue}" method="get">
+        <label for="query">Search</label>
+        <input id="query" name="query" type="search" th:value="${query}" placeholder="Name or botanical name">
+        <label for="categoryId">Category</label>
+        <select id="categoryId" name="categoryId">
+            <option value="">All categories</option>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                    th:selected="${category.id == selectedCategoryId}">Category</option>
+        </select>
+        <button class="button compact-button" type="submit">Search</button>
+        <a class="plain-link" th:href="@{/catalogue}">Clear</a>
+    </form>
+
+    <p class="result-count" th:text="${#lists.size(herbs)} + ' herbs found'">0 herbs found</p>
+    <div class="table-wrap" th:if="${!#lists.isEmpty(herbs)}">
+        <table class="catalogue-table">
+            <thead>
+            <tr><th>Name</th><th>Botanical name</th><th>Category</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="herb : ${herbs}">
+                <td><a th:href="@{/catalogue/herbs/{id}(id=${herb.id})}" th:text="${herb.name}">Herb</a></td>
+                <td><em th:text="${herb.botanicalName}">Botanical name</em></td>
+                <td th:text="${herb.categoryName}">Category</td>
+                <td th:text="${herb.description}">Description</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="empty-state" th:if="${#lists.isEmpty(herbs)}">No herbs match that search.</p>
+</main>
+</body>
+</html>

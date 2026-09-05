@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title th:text="${formTitle} + ' · Herb Catalogue'">Note · Herb Catalogue</title><link rel="stylesheet" th:href="@{/css/application.css}"></head>
+<body class="catalogue-page">
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a><nav class="site-nav" aria-label="Main navigation"><a th:href="@{/catalogue}">Browse</a><a th:href="@{/notes}">My notes</a><form th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form></nav></div></header>
+<main class="content-shell form-content"><p class="back-link"><a th:href="@{/notes}">← Back to notes</a></p><h1 th:text="${formTitle}">Add note</h1>
+    <form class="catalogue-form" th:action="${formAction}" th:object="${noteForm}" method="post">
+        <label for="herbId">Herb</label><select id="herbId" th:field="*{herbId}"><option value="">Choose an herb</option><option th:each="herb : ${herbs}" th:value="${herb.id}" th:text="${herb.name}">Herb</option></select><p class="field-error" th:errors="*{herbId}"></p>
+        <label for="title">Title</label><input id="title" th:field="*{title}" maxlength="100"><p class="field-error" th:errors="*{title}"></p>
+        <label for="body">Note</label><textarea id="body" th:field="*{body}" rows="7" maxlength="1200"></textarea><p class="field-error" th:errors="*{body}"></p>
+        <button class="button" type="submit">Save note</button>
+    </form>
+</main>
+</body>
+</html>

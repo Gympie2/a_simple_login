@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,6 +24,11 @@ public class RestExceptionHandler {
     ResponseEntity<ApiError> conflictOrForbidden(RuntimeException exception) {
         HttpStatus status = exception instanceof ForbiddenOperationException ? HttpStatus.FORBIDDEN : HttpStatus.CONFLICT;
         return response(status, exception.getMessage(), Map.of());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    ResponseEntity<ApiError> accessDenied(AccessDeniedException exception) {
+        return response(HttpStatus.FORBIDDEN, "You do not have permission to perform that action.", Map.of());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

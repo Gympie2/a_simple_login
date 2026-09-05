@@ -13,6 +13,7 @@
         <h1 id="menu-title">Simple Log-in Page</h1>
         <p class="intro">Welcome, <strong th:text="${currentUsername}">reader</strong>.</p>
         <div class="menu-line" aria-hidden="true"><span></span><span>✦</span><span></span></div>
+        <a class="button" th:href="@{/catalogue}">Catalogue</a>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="button secondary">Log out</button>
         </form>

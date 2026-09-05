@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${herb.name} + ' · Herb Catalogue'">Herb · Herb Catalogue</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+</head>
+<body class="catalogue-page">
+<header class="site-header">
+    <div class="site-header-inner">
+        <a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a th:href="@{/catalogue}">Browse</a>
+            <a th:if="${currentUsername != null}" th:href="@{/notes}">My notes</a>
+            <a th:if="${isAdmin}" th:href="@{/admin/herbs}">Manage</a>
+            <a th:if="${currentUsername == null}" th:href="@{/login}">Log in</a>
+            <form th:if="${currentUsername != null}" th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form>
+        </nav>
+    </div>
+</header>
+<main class="content-shell narrow-content">
+    <p class="back-link"><a th:href="@{/catalogue}">← Back to catalogue</a></p>
+    <article class="record-card">
+        <p class="record-category" th:text="${herb.categoryName}">Category</p>
+        <h1 th:text="${herb.name}">Herb</h1>
+        <p class="botanical-name" th:text="${herb.botanicalName}">Botanical name</p>
+        <p class="record-description" th:text="${herb.description}">Description</p>
+        <a th:if="${currentUsername != null}" class="button modest-button"
+           th:href="@{/notes/new(herbId=${herb.id})}">Add a personal note</a>
+    </article>
+</main>
+</body>
+</html>

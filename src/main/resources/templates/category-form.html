@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title th:text="${formTitle} + ' · Herb Catalogue'">Category · Herb Catalogue</title><link rel="stylesheet" th:href="@{/css/application.css}"></head>
+<body class="catalogue-page">
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a><nav class="site-nav" aria-label="Main navigation"><a th:href="@{/admin/herbs}">Manage herbs</a><a th:href="@{/admin/categories}">Categories</a><a th:href="@{/admin/users}">Users</a><form th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form></nav></div></header>
+<main class="content-shell form-content"><p class="back-link"><a th:href="@{/admin/categories}">← Back to categories</a></p><h1 th:text="${formTitle}">Add category</h1>
+    <form class="catalogue-form" th:action="${formAction}" th:object="${categoryForm}" method="post">
+        <p class="field-error" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.globalErrors()}" th:text="${error}"></p>
+        <label for="name">Name</label><input id="name" th:field="*{name}" maxlength="80"><p class="field-error" th:errors="*{name}"></p>
+        <label for="description">Description</label><textarea id="description" th:field="*{description}" rows="6" maxlength="500"></textarea><p class="field-error" th:errors="*{description}"></p>
+        <button class="button" type="submit">Save category</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes · Herb Catalogue</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+</head>
+<body class="catalogue-page">
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" th:href="@{/catalogue}">Herb Catalogue</a><nav class="site-nav" aria-label="Main navigation"><a th:href="@{/catalogue}">Browse</a><a th:href="@{/notes}">My notes</a><a th:if="${isAdmin}" th:href="@{/admin/herbs}">Manage</a><form th:action="@{/logout}" method="post"><button type="submit" class="link-button">Log out</button></form></nav></div></header>
+<main class="content-shell narrow-content">
+    <div class="page-heading with-action"><div><h1>My notes</h1><p>Notes are visible only to you unless an administrator manages the account.</p></div><a class="button compact-link" th:href="@{/notes/new}">Add note</a></div>
+    <p class="notice success" th:if="${param.created}">Note added.</p>
+    <p class="notice success" th:if="${param.updated}">Note updated.</p>
+    <p class="notice success" th:if="${param.deleted}">Note deleted.</p>
+    <section class="note-list" th:if="${!#lists.isEmpty(notes)}">
+        <article class="note-card" th:each="note : ${notes}">
+            <p class="record-category" th:text="${note.herbName}">Herb</p>
+            <h2 th:text="${note.title}">Note title</h2>
+            <p th:text="${note.body}">Note body</p>
+            <div class="card-actions"><a th:href="@{/notes/{id}/edit(id=${note.id})}">Edit</a><form th:action="@{/notes/{id}/delete(id=${note.id})}" method="post"><button type="submit" class="text-danger">Delete</button></form></div>
+        </article>
+    </section>
+    <p class="empty-state" th:if="${#lists.isEmpty(notes)}">You have not added any notes yet.</p>
+</main>
+</body>
+</html>
