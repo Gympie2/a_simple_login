@@ -10,22 +10,9 @@
     </parent>
     <groupId>gympie.springboot</groupId>
     <artifactId>a_simple_login</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>a_simple_login</name>
-    <description>A focused Spring Boot registration and login demonstration.</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+    <version>1.0-Beginning</version>
+    <name>Herb Catalogue</name>
+    <description>A Spring Boot herb catalogue with secure accounts and personal notes.</description>
     <properties>
         <java.version>17</java.version>
     </properties>
